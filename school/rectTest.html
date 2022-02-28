@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script id="test-vertex-shader" type="x-shader/x-vertex">
+      attribute vec4 testPosition;
+
+      void main() {
+        gl_Position = testPosition;
+      }
+    </script>
+
+    <script id="test-fragment-shader" type="x-shader/x-fragment">
+      precision mediump float;
+
+      void main(){
+        gl_FragColor = vec4(0.6,1.0,0.0,0.7);
+      }
+    </script>
+
+    
+    <script type="text/javascript" src="../Common/initShaders.js"></script>
+    <script type="text/javascript" src="rectTest.js"></script>
+  </head>
+  <body>
+
+    <canvas id="glCanvas" width="512" height="512">
+      canvas is not showing now
+    </canvas>
+  </body>
+</html>
