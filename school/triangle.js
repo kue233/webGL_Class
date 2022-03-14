@@ -1,5 +1,6 @@
 var gl;
 var points;
+var firstX = 0.1;
 
 window.onload = function init() {
   var canvas = document.getElementById("gl-canvas");
@@ -10,7 +11,7 @@ window.onload = function init() {
   }
 
   //var vertices = new Float32Array([-1, -1, 0, 1, 1, -1]);
-  var vertices = new Float32Array([-0.1, -0.1, 0.1, 0.5, 0.7, 0]);
+  var vertices = new Float32Array([firstX, -0.1, 0.1, 0.5, 0.7, 0]);
 
   //  Configure WebGL
 
@@ -34,10 +35,19 @@ window.onload = function init() {
   gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0);
   gl.enableVertexAttribArray(vPosition);
 
+  console.log(firstX);
+  // html interact
+  document.getElementById("testBtn").onclick = function () {
+    firstX = 0.5;
+    alert("test");
+    console.log(firstX);
+  };
+
   render();
 };
 
 function render() {
+  firstX = 0.5;
   gl.clear(gl.COLOR_BUFFER_BIT);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
 }
