@@ -15,8 +15,9 @@ window.onload = () => {
   }
 
   // define triangle vertices
-  var vertices = new Float32Array([-0.5, -0.1, 0.1, 0.5, 0.7, 0]);
-
+  var point = [-0.5, -0.1, 0.1, 0.5, 0.7, 0];
+  var vertices = new Float32Array(point);
+  
   // set original point of viewport at (0,0)
   // set width and height of viewport as canvas' width and height
   gl.viewport(0, 0, canvas.width, canvas.height);
@@ -84,3 +85,11 @@ window.onload = () => {
   // count means run the vertex shader x times
   gl.drawArrays(gl.TRIANGLES, 0, 3);
 };
+
+function test(point) {
+  var button = document.getElementById("testBtn");
+  button.addEventListener("click", function () {
+    point = [1, -0.1, 0.1, 0.5, 0.7, 0];
+    // alert("asd");
+  });
+}

@@ -1,0 +1,14 @@
+{
+  "name": "selfstudy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gl-matrix-min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
