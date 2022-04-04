@@ -33,7 +33,7 @@ window.onload = function init() {
     testVertices = testVertices.concat(points);
     console.log(new Float32Array(flatten(points)).byteLength);
 
-    gl.bufferSubData(gl.ARRAY_BUFFER, 24 * triangleNum, flatten(points));
+    gl.bufferSubData(gl.ARRAY_BUFFER, 24 * triangleNum, flatten(testVertices));
 
     triangleNum++;
   });
@@ -66,7 +66,7 @@ function render() {
 
   gl.bindBuffer(gl.ARRAY_BUFFER, bufferId1);
   gl.vertexAttribPointer(vPosition1, 2, gl.FLOAT, false, 0, 0);
-  gl.drawArrays(gl.TRIANGLES, 0, triangleNum);
+  gl.drawArrays(gl.TRIANGLES, 0, 6 * triangleNum);
 
   /* gl.bindBuffer(gl.ARRAY_BUFFER, bufferId2);
   gl.vertexAttribPointer(vPosition1, 2, gl.FLOAT, false, 0, 6);

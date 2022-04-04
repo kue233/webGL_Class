@@ -174,18 +174,26 @@ const cardDragMove = (ev) => {
   const targetClass = ev.target.className;
   const tgtClassArr = targetClass.split(" ");
 
-  if (tgtClassArr.includes("cards")) {
+  console.log("------------------------");
+  /* if (tgtClassArr.includes("cards")) {
     console.log("contains cards");
   }
-  console.log("------------------------");
-  console.log(ev.target.childNodes[3].textContent);
+  console.log(ev.target.childNodes[3].textContent); */
   const currentCardContextList =
     ev.target.childNodes[3].textContent.split("\n");
-  console.log(currentCardContextList);
-  console.log(currentCardContextList.length);
+  /* console.log(currentCardContextList);
+  console.log(ev.target.innerText.split("\n"));
+  console.log(currentCardContextList.length); */
   // var d1 = document.querySelector("." + targetClass).childNodes[3].textContent;
 
-  
+  // test
+  const lastCard = currentCardContextList.splice(
+    currentCardContextList.length - 2,
+    1
+  );
+  console.log(lastCard);
+  console.log(currentCardContextList);
+  //ev.target.childNodes[3].innerText = "test";
 };
 
 const cardDropMove = () => {};
