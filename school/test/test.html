@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div1 {
+        display: block;
+        float: left;
+        border: 1px solid black;
+        width: 256px;
+        height: 256px;
+        margin: 10px;
+        padding: 10px;
+      }
+      #divTest {
+        display: block;
+        float: left;
+        border: 1px solid black;
+        width: 256px;
+        height: 256px;
+        margin: 10px;
+        padding: 10px;
+      }
+    </style>
+
+    <script src="test.js"></script>
+  </head>
+  <body>
+    <div>
+      <hr
+        style="border: 1 dashed #987cb9"
+        width="80%"
+        color="#987cb9"
+        size="1"
+      />
+      <div id="div1" width="256"></div>
+      <br />
+      <input type="file" id="fileInput" onchange="fileTest(event);" multiple />
+      <br />
+      <p
+        draggable="true"
+        ondragstart="event.dataTransfer.setData('text/plain', 'This text may be dragged')"
+      >
+        This text <strong>may</strong> be dragged.
+      </p>
+    </div>
+    <br />
+  </body>
+</html>

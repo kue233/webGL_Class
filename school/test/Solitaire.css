@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  padding: 10px;
+  height: 700px;
+}
+
+.left {
+  text-align: center;
+  width: 20%;
+  float: center;
+}
+.right {
+  width: 20%;
+}
+
+.mid {
+  width: 60%;
+}
+
+.totalDeck {
+  margin: 20%;
+  background-color: pink;
+  width: 108px;
+  height: 190px;
+}
+
+.decks {
+  text-align: center;
+  float: left;
+  background-color: pink;
+  border: 1px solid black;
+  width: 108px;
+  height: 190px;
+  margin: 10px;
+}
+
+.deck1 {
+  width: 11%;
+}
+.deck2 {
+  width: 11%;
+}
+.deck3 {
+  width: 11%;
+}
+.deck4 {
+  width: 11%;
+}
+.deck5 {
+  width: 11%;
+}
+.deck6 {
+  width: 11%;
+}
+.deck7 {
+  width: 11%;
+}
+
+.aceDecks {
+  float: right;
+  text-align: center;
+  background-color: pink;
+  border: 1px solid black;
+  width: 108px;
+  height: 190px;
+  margin: 10px;
+}
