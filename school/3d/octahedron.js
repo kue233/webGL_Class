@@ -46,4 +46,61 @@ window.onload = function init() {
 
   // get attribute location of color vertices
   var vColor = gl.getAttribLocation(program, "vColor");
+  gl.vertexAttribPointer(vColor, 4, gl.FLOAT, false, 0, 0);
+  gl.enableVertexAttribArray(vColor);
+
+  // vertex buffer
+  var vBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, flatten(points), gl.STATIC_DRAW);
+
+  var vPosition = gl.getAttribLocation(program, "vPosition");
+  gl.vertexAttribPointer(vPosition, 4, gl.FLOAT, false, 0, 0);
+  gl.enableVertexAttribArray(vPosition);
+
+  thetaLoc = gl.getUniformLocation(program, "theta");
+
+  // TODO: event listeners for buttons
+
+  // render loop
+  render();
 };
+
+function colorCube() {}
+
+function quad(a, b, c) {
+  var vertices = [
+    vec4(0.5, 0.0, 0.0, 1.0), //1
+    vec4(0.0, 0.0, 0.5, 1.0), //2
+    vec4(0.0, 0.5, 0.0, 1.0), //3
+    vec4(-0.5, 0.0, 0.0, 1.0), //4
+    vec4(0.0, 0.0, -0.5, 1.0), //5
+    vec4(0.0, -0.5, 0.0, 1.0), //6
+  ];
+
+  var vertexColors = [
+    [0.0, 0.0, 0.0, 1.0], // black
+    [1.0, 0.0, 0.0, 1.0], // red
+    [1.0, 1.0, 0.0, 1.0], // yellow
+    [0.0, 1.0, 0.0, 1.0], // green
+    [0.0, 0.0, 1.0, 1.0], // blue
+    [1.0, 0.0, 1.0, 1.0], // magenta
+  ];
+
+  var indices = [a, b, c]; // render one face
+
+  for (let i = 0; i < indices.length; ++i) {
+    points.push(vertices[indices[i]]);
+
+    colors.push(vertexColors[a]);
+  }
+}
+
+function render() {
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  theta[axis] += 2.0;
+  gl.uniform3fv(thetaLoc, theta);
+  gl.drawArrays(gl.TRIANGLES, 0, NumVertices);
+
+  requestAnimationFrame(render);
+}
