@@ -20,6 +20,18 @@ var distanceLoc;
 
 // translation 4v
 var translateArr = [0.0, 0.0, 0.0, 0.0];
+var x = 0;
+var dis = 0.0;
+
+// interactive img
+var img = null;
+
+// score
+var score = 0;
+var isLost = false;
+var isTouched = false;
+var isImgHidden = false;
+var imgHiddenEvent = [];
 
 window.onload = function init() {
   canvas = document.getElementById("gl-canvas");
@@ -66,7 +78,7 @@ window.onload = function init() {
   distanceLoc = gl.getUniformLocation(program, "distance");
 
   // event listeners for buttons
-  document.getElementById("xBtn").onclick = function () {
+  /*  document.getElementById("xBtn").onclick = function () {
     axis = xAxis;
   };
   document.getElementById("yBtn").onclick = function () {
@@ -84,7 +96,19 @@ window.onload = function init() {
   };
   document.getElementById("zMoveBtn").onclick = function () {
     translateArr[3] += 0.1;
-  };
+  }; */
+  img = document.getElementById("img1");
+
+  // event listener
+  canvas.addEventListener(
+    "click",
+    function () {
+      if (img.style.visibility == "") {
+        score++;
+      }
+    },
+    false
+  );
 
   // render loop
   render();
@@ -143,6 +167,26 @@ function render() {
   theta[2] += 3.0;
 
   // further distance
+  if (!isLost) {
+    x += 0.1;
+    dis = Math.sin(x) + 0.3; // -0.7 - 1.3 , mid 0.4
+    if (dis >= 0.2 && dis < 1.3) {
+      document.getElementById("img1").style.visibility = "hidden";
+      isTouched = false;
+      isImgHidden = true;
+    }
+    if (dis >= -0.7 && dis < 0.2) {
+      document.getElementById("img1").style.visibility = "";
+      isImgHidden = false;
+    }
+    //translateArr[1] = -4 * dis ** 2 + 4 * dis;
+    translateArr[1] = -(dis ** 2) + 1;
+    translateArr[3] = dis;
+  }
+
+  // update score
+  document.getElementById("score").innerHTML = score;
+
   gl.uniform4fv(distanceLoc, translateArr);
 
   gl.uniform3fv(thetaLoc, theta);
