@@ -11,6 +11,7 @@
       varying vec4 fColor;
 
       uniform vec3 theta;
+      uniform vec4 distance;
 
       void main(){
         vec3 angles = radians(theta);
@@ -36,22 +37,41 @@
           0.0, 0.0, 0.0, 1.0
           );
         fColor = vColor;
-        gl_Position = rz * ry * rx * vPosition;
+        gl_Position = distance +  rz * ry * rx * vPosition;
       }
     </script>
-    <script id="fragment-shader" type="x-shader/x-fragment"></script>
+    <script id="fragment-shader" type="x-shader/x-fragment">
+      precision mediump float;
+
+      varying vec4 fColor;
+
+      void main(){
+        gl_FragColor = fColor;
+      }
+    </script>
     <script type="text/javascript" src="../../Common/webgl-utils.js"></script>
     <script type="text/javascript" src="../../Common/initShaders.js"></script>
     <script type="text/javascript" src="../../Common/MV.js"></script>
-    <script type="text/javascript" src="octahendron.js"></script>
+    <script type="text/javascript" src="octahedron.js"></script>
   </head>
   <body>
     <canvas
-      id="gl_canvas"
+      id="gl-canvas"
       width="512"
       height="512"
-      style="position: absolute; border: 1px solid black"
-      >gl is not supported</canvas
-    >
+      style="position: relative; border: 1px solid black"
+      >gl is not supported
+    </canvas>
+    <br />
+
+    <button id="xBtn">Rotate X</button>
+    <button id="yBtn">Rotate Y</button>
+    <button id="zBtn">Rotate Z</button>
+    <br />
+    <br />
+
+    <button id="xMoveBtn">move X</button>
+    <button id="yMoveBtn">move Y</button>
+    <button id="zMoveBtn">move Z</button>
   </body>
 </html>
