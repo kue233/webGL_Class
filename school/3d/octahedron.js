@@ -20,7 +20,7 @@ var distanceLoc;
 
 // translation 4v
 var translateArr = [0.0, 0.0, 0.0, 0.0];
-var x = 0;
+var x = 4;
 var dis = 0.0;
 
 // interactive img
@@ -29,9 +29,14 @@ var img = null;
 // score
 var score = 0;
 var isLost = false;
-var isTouched = false;
+var isTouched = true;
 var isImgHidden = false;
 var imgHiddenEvent = [];
+
+// fail
+var stopBtn;
+var offsetH = 0;
+var y = 0;
 
 window.onload = function init() {
   canvas = document.getElementById("gl-canvas");
@@ -98,6 +103,7 @@ window.onload = function init() {
     translateArr[3] += 0.1;
   }; */
   img = document.getElementById("img1");
+  stopBtn = document.getElementById("stop");
 
   // event listener
   canvas.addEventListener(
@@ -105,10 +111,15 @@ window.onload = function init() {
     function () {
       if (img.style.visibility == "") {
         score++;
+        isTouched = true;
+        isLost = false;
       }
     },
     false
   );
+
+  // TODO: delete after test stop moving
+  stopBtn.addEventListener("click", stop);
 
   // render loop
   render();
@@ -170,6 +181,7 @@ function render() {
   if (!isLost) {
     x += 0.1;
     dis = Math.sin(x) + 0.3; // -0.7 - 1.3 , mid 0.4
+    //console.log(dis);
     if (dis >= 0.2 && dis < 1.3) {
       document.getElementById("img1").style.visibility = "hidden";
       isTouched = false;
@@ -179,11 +191,25 @@ function render() {
       document.getElementById("img1").style.visibility = "";
       isImgHidden = false;
     }
+    // fail judge
+    if (dis >= -0.2 && dis < -0.1 && !isTouched) {
+      isLost = true;
+      stop();
+    }
+
     //translateArr[1] = -4 * dis ** 2 + 4 * dis;
     translateArr[1] = -(dis ** 2) + 1;
     translateArr[3] = dis;
-  }
+    //console.log("1 x: " + x + " " + translateArr[1]);
+  } else {
+    // x has been reset
+    y += 0.1;
+    if (y <= 4.0) {
+      translateArr[1] = Math.E ** -y + offsetH;
+    }
 
+    //console.log("2 x:" + x + " " + translateArr[1]);
+  }
   // update score
   document.getElementById("score").innerHTML = score;
 
@@ -193,4 +219,13 @@ function render() {
   gl.drawArrays(gl.TRIANGLES, 0, NumVertices);
 
   requestAnimationFrame(render);
+}
+
+function stop() {
+  isLost = true;
+  y = dis;
+  offsetH = -(y ** 2) + 1 - Math.E ** -y;
+  if (y >= 0.715) {
+    offsetH = -offsetH;
+  }
 }
