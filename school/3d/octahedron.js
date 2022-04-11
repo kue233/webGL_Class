@@ -192,7 +192,7 @@ function render() {
       isImgHidden = false;
     }
     // fail judge
-    if (dis >= -0.2 && dis < -0.1 && !isTouched) {
+    if (dis >= -0.3 && dis < -0.2 && !isTouched) {
       isLost = true;
       stop();
     }
